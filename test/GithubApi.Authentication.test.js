@@ -13,6 +13,7 @@ describe('Github Api Test', () => {
         .auth('token', process.env.ACCESS_TOKEN)
         .then((response) => {
           expect(response.status).to.equal(statusCode.OK);
+          expect(response.body.description).equal('This is a Workshop about Api Testing in JavaScript');
         }));
   });
 
@@ -21,5 +22,6 @@ describe('Github Api Test', () => {
       .query(`access_token=${process.env.ACCESS_TOKEN}`)
       .then((response) => {
         expect(response.status).to.equal(statusCode.OK);
+        expect(response.body.description).equal('This is a Workshop about Api Testing in JavaScript');
       }));
 });
