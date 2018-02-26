@@ -1,5 +1,5 @@
 {
-  "name": "workshop-api-testing",
+  "name": "workshop-api-testing-js",
   "version": "1.0.0",
   "description": "This is a Workshop about Api Testing in JavaScript",
   "main": "index.js",
@@ -29,7 +29,8 @@
     "eslint-plugin-import": "^2.9.0",
     "http-status-codes": "^1.3.0",
     "mocha": "^5.0.1",
-    "mochawesome": "^3.0.2"
+    "mochawesome": "^3.0.2",
+    "travis-cli": "^1.0.9"
   },
   "dependencies": {
     "superagent": "^3.8.2",
