@@ -30,12 +30,12 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.9.0",
     "http-status-codes": "^1.3.0",
+    "md5": "^2.2.1",
     "mocha": "^5.0.1",
     "mochawesome": "^3.0.2",
     "travis-cli": "^1.0.9"
   },
   "dependencies": {
-    "md5": "^2.2.1",
     "superagent": "^3.8.2",
     "superagent-promise": "^1.1.0"
   }
