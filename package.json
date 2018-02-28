@@ -24,6 +24,8 @@
   "homepage": "https://github.com/lvzh90/workshop-api-testing-js#readme",
   "devDependencies": {
     "chai": "^4.1.2",
+    "chai-json-schema": "^1.5.0",
+    "chai-subset": "^1.6.0",
     "eslint": "^4.18.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.9.0",
@@ -33,6 +35,7 @@
     "travis-cli": "^1.0.9"
   },
   "dependencies": {
+    "md5": "^2.2.1",
     "superagent": "^3.8.2",
     "superagent-promise": "^1.1.0"
   }
