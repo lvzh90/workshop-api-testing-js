@@ -7,7 +7,7 @@ chai.use(require('chai-subset'));
 const md5 = require('md5');
 
 describe('Github Repositories Test', () => {
-  describe('• Consume the service https://api.github.com/users/aperdomob', () => {
+  describe('Consume the service https://api.github.com/users/aperdomob', () => {
     const urlBase = 'https://api.github.com';
     const githubUserName = 'aperdomob';
     let userSession;
