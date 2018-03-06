@@ -13,12 +13,11 @@ describe('Github Repositories Test', () => {
     let userSession;
     let statusCodeRequest;
 
-    before((done) => {
-      agent.get(`${urlBase}/users/${githubUserName}`)
+    before(() => {
+      return agent.get(`${urlBase}/users/${githubUserName}`)
         .then((response) => {
           userSession = response.body;
           statusCodeRequest = response.status;
-          done();
         });
     });
 
@@ -35,12 +34,11 @@ describe('Github Repositories Test', () => {
       let repositories;
       let repository;
 
-      before((done) => {
-        agent.get(userSession.repos_url)
+      before(() => {
+        return agent.get(userSession.repos_url)
           .then((response) => {
             repositories = response.body;
             repository = repositories.find(repo => repo.name === expectedRepository);
-            done();
           });
       });
 
@@ -55,13 +53,12 @@ describe('Github Repositories Test', () => {
         let zip;
         let statusCodeRepositoryRequest;
 
-        before((done) => {
-          agent.get(`${repository.html_url}/archive/${repository.default_branch}.zip`)
+        before(() => {
+          return agent.get(`${repository.html_url}/archive/${repository.default_branch}.zip`)
             .buffer(true)
             .then((response) => {
               zip = response.text;
               statusCodeRepositoryRequest = response.status;
-              done();
             });
         });
 
@@ -79,12 +76,11 @@ describe('Github Repositories Test', () => {
             sha: '9bcf2527fd5cd12ce18e457581319a349f9a56f3'
           };
 
-          before((done) => {
-            agent.get(`${repository.url}/contents`)
+          before(() => {
+            return agent.get(`${repository.url}/contents`)
               .then((response) => {
                 const files = response.body;
                 readmeFile = files.find(file => file.name === 'README.md');
-                done();
               });
           });
 
@@ -96,11 +92,10 @@ describe('Github Repositories Test', () => {
           describe('Download README.md', () => {
             let contentFile;
 
-            before((done) => {
-              agent.get(readmeFile.download_url)
+            before(() => {
+              return agent.get(readmeFile.download_url)
                 .then((response) => {
                   contentFile = response.text;
-                  done();
                 });
             });
 
