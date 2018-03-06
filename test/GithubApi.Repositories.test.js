@@ -13,13 +13,11 @@ describe('Github Repositories Test', () => {
     let userSession;
     let statusCodeRequest;
 
-    before(() => {
-      return agent.get(`${urlBase}/users/${githubUserName}`)
-        .then((response) => {
-          userSession = response.body;
-          statusCodeRequest = response.status;
-        });
-    });
+    before(() => agent.get(`${urlBase}/users/${githubUserName}`)
+      .then((response) => {
+        userSession = response.body;
+        statusCodeRequest = response.status;
+      }));
 
     it('Validate userName, company and location', () => {
       expect(statusCodeRequest).to.equal(statusCode.OK);
@@ -34,13 +32,11 @@ describe('Github Repositories Test', () => {
       let repositories;
       let repository;
 
-      before(() => {
-        return agent.get(userSession.repos_url)
-          .then((response) => {
-            repositories = response.body;
-            repository = repositories.find(repo => repo.name === expectedRepository);
-          });
-      });
+      before(() => agent.get(userSession.repos_url)
+        .then((response) => {
+          repositories = response.body;
+          repository = repositories.find(repo => repo.name === expectedRepository);
+        }));
 
       it(`${expectedRepository} repository`, () => {
         assert.exists(repository);
@@ -53,14 +49,12 @@ describe('Github Repositories Test', () => {
         let zip;
         let statusCodeRepositoryRequest;
 
-        before(() => {
-          return agent.get(`${repository.html_url}/archive/${repository.default_branch}.zip`)
-            .buffer(true)
-            .then((response) => {
-              zip = response.text;
-              statusCodeRepositoryRequest = response.status;
-            });
-        });
+        before(() => agent.get(`${repository.html_url}/archive/${repository.default_branch}.zip`)
+          .buffer(true)
+          .then((response) => {
+            zip = response.text;
+            statusCodeRepositoryRequest = response.status;
+          }));
 
         it('Downloading...', () => {
           expect(statusCodeRepositoryRequest).to.equal(statusCode.OK);
@@ -76,13 +70,11 @@ describe('Github Repositories Test', () => {
             sha: '9bcf2527fd5cd12ce18e457581319a349f9a56f3'
           };
 
-          before(() => {
-            return agent.get(`${repository.url}/contents`)
-              .then((response) => {
-                const files = response.body;
-                readmeFile = files.find(file => file.name === 'README.md');
-              });
-          });
+          before(() => agent.get(`${repository.url}/contents`)
+            .then((response) => {
+              const files = response.body;
+              readmeFile = files.find(file => file.name === 'README.md');
+            }));
 
           it('Searching...', () => {
             assert.exists(readmeFile);
@@ -92,12 +84,10 @@ describe('Github Repositories Test', () => {
           describe('Download README.md', () => {
             let contentFile;
 
-            before(() => {
-              return agent.get(readmeFile.download_url)
-                .then((response) => {
-                  contentFile = response.text;
-                });
-            });
+            before(() => agent.get(readmeFile.download_url)
+              .then((response) => {
+                contentFile = response.text;
+              }));
 
             it('Downloading...', () => {
               assert.isNotNull(md5(contentFile));
