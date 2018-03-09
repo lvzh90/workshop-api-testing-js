@@ -7,13 +7,15 @@ chai.use(require('chai-subset'));
 const md5 = require('md5');
 
 describe('Github Repositories Test', () => {
+  const urlBase = 'https://api.github.com';
+  const githubUserName = 'aperdomob';
+
   describe('Consume the service https://api.github.com/users/aperdomob', () => {
-    const urlBase = 'https://api.github.com';
-    const githubUserName = 'aperdomob';
     let userSession;
     let statusCodeRequest;
 
     before(() => agent.get(`${urlBase}/users/${githubUserName}`)
+      .auth('token', process.env.ACCESS_TOKEN)
       .then((response) => {
         userSession = response.body;
         statusCodeRequest = response.status;
@@ -33,6 +35,7 @@ describe('Github Repositories Test', () => {
       let repository;
 
       before(() => agent.get(userSession.repos_url)
+        .auth('token', process.env.ACCESS_TOKEN)
         .then((response) => {
           repositories = response.body;
           repository = repositories.find(repo => repo.name === expectedRepository);
@@ -50,6 +53,7 @@ describe('Github Repositories Test', () => {
         let statusCodeRepositoryRequest;
 
         before(() => agent.get(`${repository.html_url}/archive/${repository.default_branch}.zip`)
+          .auth('token', process.env.ACCESS_TOKEN)
           .buffer(true)
           .then((response) => {
             zip = response.text;
@@ -71,6 +75,7 @@ describe('Github Repositories Test', () => {
           };
 
           before(() => agent.get(`${repository.url}/contents`)
+            .auth('token', process.env.ACCESS_TOKEN)
             .then((response) => {
               const files = response.body;
               readmeFile = files.find(file => file.name === 'README.md');
