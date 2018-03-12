@@ -10,22 +10,22 @@ describe('Consuming DELETE methods', () => {
 
   describe('Consume the service https://api.github.com/gists', () => {
     const jsCode = `
-            const createPromise = (index, time) =>
-              new Promeise ((resolve, reject) => {
-                  setTimeout(() => {
-                      console.log('I am a callback ', index);
-                      resolve(index);
-                  }, time);
-              });
+      const createPromise = (index, time) =>
+        new Promeise ((resolve, reject) => {
+           setTimeout(() => {
+              console.log('I am a callback ', index);
+              resolve(index);
+            }, time);
+        });
 
-              const main = async () => {
-                  await createPromise(1, 1000);
-                  await createPromise(2, 100);
-              }
+        const main = async () => {
+          await createPromise(1, 1000);
+          await createPromise(2, 100);
+        }
 
-              main();
-              console.log('finished');
-        `;
+        main();
+        console.log('finished');
+    `;
 
     const createGist = {
       public: true,
@@ -97,7 +97,6 @@ describe('Consuming DELETE methods', () => {
           }
         ).then((response) => {
           newStatusCodeRequest = response.status;
-          // return response.json(); -- It has no content, it isn't possible to use reponse.json()
         }));
 
         it('verify that the gist does not exists.', () => {
