@@ -45,7 +45,7 @@ const listPublicEventsSchema = {
               distinct_size: { type: 'number' },
               head: { type: 'string' },
               push_id: { type: 'number' },
-              ref: { type: 'string' },
+              ref: { type: ['null', 'string'] },
               size: { type: 'number' }
             }
           },
@@ -60,7 +60,8 @@ const listPublicEventsSchema = {
           },
           type: { type: 'string' }
         }
-      }
+      },
+      required: ['status', 'body']
     },
     status: { type: 'number' }
   }
