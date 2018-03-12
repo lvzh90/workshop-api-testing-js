@@ -45,7 +45,7 @@ describe('Response Times', () => {
 
     before(() => agent.get(`${urlBase}/users`)
       .auth('token', process.env.ACCESS_TOKEN)
-      .query({ per_page: 10})
+      .query({ per_page: 10 })
       .then((response) => {
         tenUsers = response.body;
       }));
@@ -61,7 +61,7 @@ describe('Response Times', () => {
 
     before(() => agent.get(`${urlBase}/users`)
       .auth('token', process.env.ACCESS_TOKEN)
-      .query({ per_page: 50})
+      .query({ per_page: 50 })
       .then((response) => {
         fiftyUsers = response.body;
       }));
