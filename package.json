@@ -37,7 +37,6 @@
     "travis-cli": "^1.0.9"
   },
   "dependencies": {
-    "es6-promise": "^4.2.4",
     "isomorphic-fetch": "^2.2.1",
     "superagent": "^3.8.2",
     "superagent-promise": "^1.1.0"

@@ -1,6 +1,4 @@
-require('es6-promise').polyfill();
 const fetch = require('isomorphic-fetch');
-
 const statusCode = require('http-status-codes');
 const chai = require('chai');
 
