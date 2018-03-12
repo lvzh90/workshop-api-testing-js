@@ -24,4 +24,50 @@ describe('Response Times', () => {
       expect(queryTime).to.be.at.below(5000);
     });
   });
+
+
+  describe('Number of users by default', () => {
+    let allUsers;
+
+    before(() => agent.get(`${urlBase}/users`)
+      .auth('token', process.env.ACCESS_TOKEN)
+      .then((response) => {
+        allUsers = response.body;
+      }));
+
+    it('Verify the number of users.', () => {
+      expect(allUsers.length).to.equal(30);
+    });
+  });
+
+  describe('Get 10 users.', () => {
+    let tenUsers;
+
+    before(() => agent.get(`${urlBase}/users`)
+      .auth('token', process.env.ACCESS_TOKEN)
+      .query({ per_page: 10})
+      .then((response) => {
+        tenUsers = response.body;
+      }));
+
+    it('Verify the number of users is 10.', () => {
+      expect(tenUsers.length).to.equal(10);
+    });
+  });
+
+
+  describe('Get 50 users.', () => {
+    let fiftyUsers;
+
+    before(() => agent.get(`${urlBase}/users`)
+      .auth('token', process.env.ACCESS_TOKEN)
+      .query({ per_page: 50})
+      .then((response) => {
+        fiftyUsers = response.body;
+      }));
+
+    it('Verify the number of users is 50.', () => {
+      expect(fiftyUsers.length).to.equal(50);
+    });
+  });
 });
